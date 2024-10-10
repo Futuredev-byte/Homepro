@@ -7,12 +7,17 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useModal } from '../../components/context/ModalContext';
+import { useAuth } from '../../components/context/AuthContext';
 
 
 const Register = ({ toggleModal }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate  = useNavigate();
-
+  
+  const { isModalOpen, closeModal } = useModal();
+  const { signup } = useAuth()
   
   const [formData, setFormData] = useState({
     firstName: "",
@@ -32,27 +37,28 @@ const Register = ({ toggleModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = "https://homepro-backend-y4t5.onrender.com/api/auth/register";
-    try {
-      const res = await axios.post(apiUrl, formData);
+     try {
+       setLoading(true)
+      const res = await signup(formData);
       console.log(res);
       toast.success("Registration Successful!");
+      setLoading(false)
       toggleModal()
-
     } catch (err) {
-      console.error(err);
       console.error(err);
       if(err.response)
         toast.error(err.response.data.message)
+    }finally{
+      setLoading(false)
     }
   };
 
   return (
     <Wrapper>
       <ToastContainer/>
-      <div className="w-full lg:w-[628px] mx-auto h-[700px] ">
-        <div className="py-3">
-          <h1 className="mt-30 text-center text-4xl font-bold">REGISTER!</h1>
+      <div className="w-full lg:w-[500px] mx-auto h-[400px] ">
+        <div className=" px-8">
+          <h1 className="mt-20 text-center text-4xl font-bold">REGISTER!</h1>
           <p className="text-center">
             Already have an account?{" "}
             <b className="cursor-pointer text-custom-green px-1" onClick={toggleModal}>
@@ -60,7 +66,7 @@ const Register = ({ toggleModal }) => {
             </b>
           </p>
         </div>
-        <form onSubmit={handleSubmit} className=" w-full border box-content rounded-3xl shadow-lg lg:p-5">
+        <form onSubmit={handleSubmit} className=" w-full border rounded-3xl shadow-lg lg:p-5">
           <div className="mb-4">
             <label className="block text-gray-700 mb-2">First Name*</label>
             <input
@@ -154,7 +160,7 @@ const Register = ({ toggleModal }) => {
             type="submit"
             className="w-full py-4 px-4 bg-[#9FA007] text-white rounded-full hover:bg-[rgb(128,128,33)]"
           >
-            Sign Up
+            {loading ? "Loading..." : "Sign up"}
           </button>
 
           <div className="my-4 flex items-center justify-between p-3">

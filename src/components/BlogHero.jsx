@@ -7,8 +7,8 @@ const BlogHero = ({
    subtitle = "Stay informed with the latest trends, tips, and insights from the world of real estate."
 }) => {
   return (
-    <div className='bg-pale-green'>
-        <div className='bg-custom-green bg-center w-full h-[291px] flex justify-between items-center'
+    <div className='bg-pale-green '>
+        <div className='bg-custom-green bg-center lg:mt-32 w-full h-[291px] flex justify-between items-center'
     style={{backgroundImage: `url(${logo1})`}}>
 
 <div className="w-full h-full flex flex-col justify-center items-center bg-transparent">

@@ -75,7 +75,7 @@ const Login = ({ toggleModal }) => {
               </b>
             </p>
           </div>
-          <form onSubmit={handleSubmit} className="w-full border box-content rounded-3xl shadow-lg lg:p-5">
+          <form onSubmit={handleSubmit} className="w-full border rounded-3xl shadow-lg lg:p-5">
             {/* Username Field */}
             <div className="mb-4">
             <label className="block text-gray-700 mb-2">UserName*</label>

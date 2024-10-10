@@ -1,31 +1,22 @@
-import React, { createContext, useState, useContext } from 'react';
+import React from 'react';
+import Modal from "../card/Modal";
+import { useModal } from './ModalContext';
+import AuthForm from '../../pages/auth/AuthForm';
 
-// Create a context
-const ModalContext = createContext();
+const ModalWrapper = () => {
+  const { isModalOpen, closeModal, openModal } = useModal();
 
-// Create a provider component
-export const ModalProvider = ({ children }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(null); // For passing different modal content
-
-  const openModal = (content) => {
-    setModalContent(content);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setModalContent(null);
+  const openAuthModal = () => {
+    openModal(<AuthForm />);
   };
 
   return (
-    <ModalContext.Provider value={{ isModalOpen, openModal, closeModal, modalContent }}>
-      {children}
-    </ModalContext.Provider>
+    <>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        {isModalOpen && <AuthForm />}
+      </Modal>
+    </>
   );
 };
 
-// Create a custom hook for using the context
-export const useModal = () => {
-  return useContext(ModalContext);
-};
+export default ModalWrapper;

@@ -7,7 +7,7 @@ const ContactHero = ({
  }) => {
    return (
      <div className='bg-pale-green'>
-         <div className='bg-custom-green bg-center w-full h-[291px] flex justify-between items-center'
+         <div className='bg-custom-green bg-center w-full lg:mt-32 h-[291px] flex justify-between items-center'
      style={{backgroundImage: `url(${logo1})`}}>
  
  <div className="w-full h-full flex flex-col justify-center items-center bg-transparent">

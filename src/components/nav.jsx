@@ -1,58 +1,124 @@
 import React, { useState } from "react";
-import homepro from '../assets/Icons/homepro.png';
-import { NavLink } from "react-router-dom";
+import { IoMdClose } from "react-icons/io";
+import { GiHamburgerMenu } from "react-icons/gi";
+import logo from "../assets/icons/Frame 4.png"
+import { Link, NavLink } from "react-router-dom";
+import Wrapper from "./resusables/ComponentWrapper";
+import { useModal } from "./context/ModalContext";
+import AuthForm from "../pages/auth/AuthForm";
 
 const Menu = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { openModal } = useModal();
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  const onToggleMenu = () => {
+    setMenuOpen((prev) => !prev);
+  };
+
+  const onCloseMenu = () => {
+    setMenuOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    openModal(<AuthForm />); 
   };
 
   return (
-    <nav className="w-full flex flex-col lg:flex-row py-4 justify-between lg:items-center bg-custom-light">
-      <div className="lg:ml-16 flex items-center justify-between lg:justify-start">
-        <h1 className="font-pacifico text-sm flex items-center space-x-2 text-custom-green">
-          <img src={homepro} alt="" className="w-9 h-8" /> Homepro
-        </h1>
-        {/* Mobile menu button */}
-        <button
-          onClick={toggleMenu}
-          className="lg:hidden text-custom-green text-2xl focus:outline-none mr-3"
-        >
-          ☰
-        </button>
-      </div>
-
-      {/* Dropdown menu for mobile */}
-      {isOpen && (
-        <div className="lg:hidden flex flex-col items-center mt-4 space-y-2">
-          <ul className='flex flex-col items-center text-xl'>
-            <li className="text-md"><NavLink to="/" onClick={toggleMenu}>Home</NavLink></li>
-            <li className="text-md"><NavLink to="/about" onClick={toggleMenu}>About</NavLink></li>
-            <li className="text-md"><NavLink to="/listings" onClick={toggleMenu}>Listings</NavLink></li>
-            <li className="text-md"><NavLink to="/blog" onClick={toggleMenu}>Blog</NavLink></li>
-            <li className="text-md"><NavLink to="/contact" onClick={toggleMenu}>Contact</NavLink></li>
-            <button className="border border-custom-green text-custom-green rounded-3xl px-4 py-2 mr-20">Get Started</button>
-          </ul>
-        </div>
-      )}
-
-      {/* Desktop menu */}
-      <div className='hidden lg:flex flex-col lg:flex-row justify-between items-center min-w-[70%] text-2xl'>
-        <ul className='min-w-[60%] flex flex-col lg:flex-row justify-between items-center mt-3 lg:ml-52'>
-          <li className="text-sm"><NavLink to="/">Home</NavLink></li>
-          <li className="text-sm"><NavLink to="/about">About</NavLink></li>
-          <li className="text-sm"><NavLink to="/listings">Listings</NavLink></li>
-          <li className="text-sm"><NavLink to="/blog">Blog</NavLink></li>
-          <li className="text-sm"><NavLink to="/contact">Contact</NavLink></li>
-        </ul>
-      </div>
-
-      <div className='mt-8 lg:mt-2 '>
-        <button className="hidden lg:block border border-custom-green text-custom-green rounded-3xl px-4 py-2 mr-20">Get Started</button>
-      </div>
-    </nav>
+    <header className="fixed top-0 left-0 right-0 z-50  bg-[#F8F3DD]">
+      <Wrapper className="bg-hero ">
+        <nav className="flex  justify-between items-center md:h-[8rem]">
+          <Link to="/" className="flex items-baseline text-primary">
+            <img className=" cursor-pointer" src={logo} alt="logo" />
+            <b className="text-bold ml-2 font-pacifico"></b>
+          </Link>
+          <div
+            onMouseLeave={onCloseMenu}
+            className={`duration-500 md:static absolute top-0 left-0 w-full ${
+              menuOpen ? "block top-[100%]  bg-[#F8F3DD]" : "hidden top-[12%]"
+            } md:flex md:items-center md:w-auto min-h-fit flex-col md:flex-row`}
+          >
+            <ul className="flex md:flex-row flex-col md:items-center gap-8 md:gap-5 lg:gap-8 font-bold text-neutral-grey-300 md:pl-0 px-5">
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    `hover:border-b border-custom-green hover:text-custom-green py-2 transition-all duration-300 ${
+                      isActive ? "text-black border-b-primary border-b-2" : "text-black"
+                    }`
+                  }
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    `hover:border-b border-custom-green hover:text-custom-green py-2 transition-all duration-300 ${
+                      isActive ? "text-black border-b-primary border-b-2" : "text-black"
+                    }`
+                  }
+                >
+                  About Us
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/listings"
+                  className={({ isActive }) =>
+                    `hover:border-b border-custom-green hover:text-custom-green py-2 transition-all duration-300 ${
+                      isActive ? "text-black border-b-primary border-b-2" : "text-black"
+                    }`
+                  }
+                >
+                  Listings
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/blog"
+                  className={({ isActive }) =>
+                    `hover:border-b border-custom-green hover:text-custom-green py-2 transition-all duration-300 ${
+                      isActive ? "text-black border-b-primary border-b-2" : "text-black"
+                    }`
+                  }
+                >
+                  Blog
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    `hover:border-b border-b-primary hover:text-custom-green py-2 transition-all duration-300 ${
+                      isActive ? "text-black border-custom-green border-b-2" : "text-black"
+                    }`
+                  }
+                >
+                  Contact
+                </NavLink>
+              </li>
+              <div className="md:hidden flex gap-5 mb-8">
+                <button onClick={handleOpenModal} className="md:block  px-6 py-2 rounded-full border border-custom-green hover:text-custom-green font-medium text-sm transition-all ease-in-out duration-300">
+                  Get Started
+                </button>
+              </div>
+            </ul>
+          </div>
+          <div className="flex items-center">
+            <button onClick={handleOpenModal} className="hidden md:block  px-4 py-2 rounded-full border border-custom-green hover:text-custom-green font-medium text-sm transition-all ease-in-out duration-300">
+              Get Started
+            </button>
+            <div
+              onClick={onToggleMenu}
+              className="text-2xl cursor-pointer text-custom-green md:hidden"
+            >
+              {menuOpen ? <IoMdClose  className="text-3xl"/> : <GiHamburgerMenu className="text-3xl"/>}
+            </div>
+          </div>
+        </nav>
+      </Wrapper>
+    </header>
   );
 };
 
