@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import homepro from '../assets/Icons/homepro.png';
+import { NavLink } from "react-router-dom";
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,11 +28,11 @@ const Menu = () => {
       {isOpen && (
         <div className="lg:hidden flex flex-col items-center mt-4 space-y-2">
           <ul className='flex flex-col items-center text-xl'>
-            <li className="text-md"><a href="#home" onClick={toggleMenu}>Home</a></li>
-            <li className="text-md"><a href="#about" onClick={toggleMenu}>About Us</a></li>
-            <li className="text-md"><a href="#listings" onClick={toggleMenu}>Listings</a></li>
-            <li className="text-md"><a href="#blog" onClick={toggleMenu}>Blog</a></li>
-            <li className="text-md"><a href="#contact" onClick={toggleMenu}>Contact</a></li>
+            <li className="text-md"><NavLink to="/" onClick={toggleMenu}>Home</NavLink></li>
+            <li className="text-md"><NavLink to="/about" onClick={toggleMenu}>About</NavLink></li>
+            <li className="text-md"><NavLink to="/listings" onClick={toggleMenu}>Listings</NavLink></li>
+            <li className="text-md"><NavLink to="/blog" onClick={toggleMenu}>Blog</NavLink></li>
+            <li className="text-md"><NavLink to="/contact" onClick={toggleMenu}>Contact</NavLink></li>
             <button className="border border-custom-green text-custom-green rounded-3xl px-4 py-2 mr-20">Get Started</button>
           </ul>
         </div>
@@ -40,15 +41,15 @@ const Menu = () => {
       {/* Desktop menu */}
       <div className='hidden lg:flex flex-col lg:flex-row justify-between items-center min-w-[70%] text-2xl'>
         <ul className='min-w-[60%] flex flex-col lg:flex-row justify-between items-center mt-3 lg:ml-52'>
-          <li className="text-sm"><a href="#home">Home</a></li>
-          <li className="text-sm"><a href="#about">About Us</a></li>
-          <li className="text-sm"><a href="#listings">Listings</a></li>
-          <li className="text-sm"><a href="#blog">Blog</a></li>
-          <li className="text-sm"><a href="#contact">Contact</a></li>
+          <li className="text-sm"><NavLink to="/">Home</NavLink></li>
+          <li className="text-sm"><NavLink to="/about">About</NavLink></li>
+          <li className="text-sm"><NavLink to="/listings">Listings</NavLink></li>
+          <li className="text-sm"><NavLink to="/blog">Blog</NavLink></li>
+          <li className="text-sm"><NavLink to="/contact">Contact</NavLink></li>
         </ul>
       </div>
 
-      <div className='mt-8 lg:mt-0n '>
+      <div className='mt-8 lg:mt-2 '>
         <button className="hidden lg:block border border-custom-green text-custom-green rounded-3xl px-4 py-2 mr-20">Get Started</button>
       </div>
     </nav>
