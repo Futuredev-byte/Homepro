@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import imglogo2 from "../../assets/icons/flat-color-icons_google.png";
+import imglogo2 from "../../assets/Icons/flat-color-icons_google.png";
 import Wrapper from '../../components/resusables/ComponentWrapper';
 import eyeOpen from "../../assets/Icons/carbon_view.png"
 import eyeClosed from "../../assets/Icons/Vector (6).png"
